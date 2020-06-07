@@ -14,15 +14,15 @@ let initialState = {
     last_name: "",
     username: "",
     email: "",
-    bookmarks: [],
-    token: ""
+    "subscribed?": "",
+    bookmarks: []
   }
 }
 
 let reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case "SET_USER":
+    case "ADD_USER":
       let user = action.payload
       return {
         ...state,

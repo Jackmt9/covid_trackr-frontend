@@ -1,8 +1,8 @@
-const BACKEND = "127.0.0.1:3001"
+const BACKEND = 'http://localhost:3001'
 const COVIDAPI = 'https://covid19-api.org/api'
 
 export const fetchCreateUser = (user_params) => {
-        fetch( BACKEND + '/users', {
+    return fetch( BACKEND + '/users', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -19,16 +19,18 @@ export const fetchCreateUser = (user_params) => {
     .then(r => r.json())
 }
 
-export const fetchLoginUser = (username, password) => {
-    login_info = { username: username, password: password }
-    fetch( BACKEND + '/login', {
-        body: login_info
+export const fetchLoginUser = (login_params) => {
+    console.log(BACKEND)
+    return fetch( BACKEND + '/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(login_params)
     })
     .then(r => r.json())
 }
 
 export const fetchUpdateEmail = (email, token) => {
-    fetch( BACKEND + '/users', {
+    return fetch( BACKEND + '/users', {
         method: 'PATCH',
         headers: {
             'content-type': 'application/json',
@@ -42,7 +44,7 @@ export const fetchUpdateEmail = (email, token) => {
 }
 
 export const fetchDeleteUser = (token) => {
-    fetch( BACKEND + '/users', {
+    return  fetch( BACKEND + '/users', {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',
