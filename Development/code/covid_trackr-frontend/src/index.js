@@ -28,6 +28,17 @@ let reducer = (state = initialState, action) => {
         ...state,
         user: user
       }
+    case "LOGOUT":
+      console.log("Logging out")
+      return{
+        id: "",
+        first_name: "",
+        last_name: "",
+        username: "",
+        email: "",
+        "subscribed?": "",
+        bookmarks: []
+      }
 
     default:
       return state

@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 
 const NavBar = (props) => {
     console.log(localStorage.token)
+    console.log(props)
     if (localStorage.token){
     return(
         <ul className='nav'>

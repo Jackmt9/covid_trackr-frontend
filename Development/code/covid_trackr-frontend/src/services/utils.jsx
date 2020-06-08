@@ -1,5 +1,26 @@
 const BACKEND = 'http://localhost:3001'
-const COVIDAPI = 'https://covid19-api.org/api'
+const COVID_API = 'https://covid19-api.org/api'
+
+// external api
+export const fetchLatestStatus = () => {
+    return fetch(COVID_API + '/status')
+    .then(r => r.json())
+}
+
+// export const fetchLatestDiff = () => {
+//     return fetch(COVID_API + '/diff', {
+//         mode: 'no-cors'
+//     })
+//     .then(r => r.json())
+// }
+
+export const fetchDiffByCountry = (country) => {
+    return fetch(COVID_API + `/diff/${country}`)
+    .then(r => r.json())
+}
+
+
+// backend api
 
 export const fetchCreateUser = (user_params) => {
     return fetch( BACKEND + '/users', {
@@ -36,9 +57,9 @@ export const fetchUpdateEmail = (email, token) => {
             'content-type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: {
+        body: JSON.stringify({
             email: email
-        }
+        })
     })
     .then(r => r.json())
 }
