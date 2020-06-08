@@ -1,5 +1,6 @@
 const BACKEND = 'http://localhost:3001'
 const COVID_API = 'https://covid19-api.org/api'
+const PROXY = 'https://cors-anywhere.herokuapp.com/'
 
 // external api
 export const fetchLatestStatus = () => {
@@ -7,12 +8,10 @@ export const fetchLatestStatus = () => {
     .then(r => r.json())
 }
 
-// export const fetchLatestDiff = () => {
-//     return fetch(COVID_API + '/diff', {
-//         mode: 'no-cors'
-//     })
-//     .then(r => r.json())
-// }
+export const fetchLatestDiff = () => {
+    return fetch(COVID_API + '/diff')
+    .then(r => r.json())
+}
 
 export const fetchDiffByCountry = (country) => {
     return fetch(COVID_API + `/diff/${country}`)
