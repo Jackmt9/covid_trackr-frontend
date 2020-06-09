@@ -1,6 +1,5 @@
 const BACKEND = 'http://localhost:3001'
 const COVID_API = 'https://covid19-api.org/api'
-const PROXY = 'https://cors-anywhere.herokuapp.com/'
 
 // external api
 export const fetchLatestStatus = () => {
@@ -18,6 +17,12 @@ export const fetchDiffByCountry = (country) => {
     .then(r => r.json())
 }
 
+// Timeline is an array of global information cumulative-daily
+export const fetchTimeline = () => {
+    return fetch(COVID_API + `/timeline`)
+    .then(r => r.json())
+}
+
 
 // backend api
 
@@ -28,13 +33,6 @@ export const fetchCreateUser = (user_params) => {
             'content-type': 'application/json'
         },
         body: user_params
-        // ex. {
-//         "first_name": "John",
-//         "last_name": "Doe",
-//         "username": "JDOE",
-//         "email": "jdoe@gmail.com",
-//         "password": "pass"
-// }
     })
     .then(r => r.json())
 }
@@ -71,5 +69,10 @@ export const fetchDeleteUser = (token) => {
             'Authorization': `Bearer ${token}`
         }
     })
+    .then(r => r.json())
+}
+
+export const fetchCountry = (countryCode) => {
+    return fetch( BACKEND + `/countries/${countryCode}`)
     .then(r => r.json())
 }
