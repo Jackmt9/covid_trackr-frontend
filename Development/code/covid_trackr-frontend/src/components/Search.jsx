@@ -67,7 +67,7 @@ class Search extends Component {
         if (this.state.filter === "Total") {
         return (
             <tr key={row["id"]}>
-                <td onClick={this.handleBookmark}>☆</td>
+                <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>☆</td>
                 <td>{row["country"]}</td>
                 <td>{row["cases"]}</td>
                 <td>{row["deaths"]}</td>
@@ -77,7 +77,7 @@ class Search extends Component {
         } else {
             return (
                 <tr key={row["id"]}>
-                    <td onClick={this.handleBookmark}>☆</td>
+                    <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>☆</td>
                     <td>{row["country"]}</td>
                     <td>{row["new_cases"]}</td>
                     <td>{row["new_deaths"]}</td>
@@ -87,13 +87,13 @@ class Search extends Component {
         }
     }
 
-    handleBookmark = (evt) => {
+    handleBookmark = (evt, id) => {
         evt.target.innerText = "⭑"
-        debugger
-        // handle fetch and unclicking
-        const country = evt.target.nextElementSibling.innerText
-        console.log(country)
-        // console.log(id)
+        // debugger
+        // // handle fetch and unclicking
+        // const country = evt.target.nextElementSibling.innerText
+        // console.log(country)
+        console.log(id)
 
     }
 
