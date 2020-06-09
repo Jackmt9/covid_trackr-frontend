@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Search from './components/Search'
 import WorldView from './components/WorldView'
 import BookmarkTab from './components/BookmarkTab'
+import CreateAccount from './components/CreateAccount'
 import AccountTab from './components/AccountTab'
 import LoginOrSignUp from './components/LoginOrSignUp.jsx'
 import NavBar from './components/NavBar'
@@ -28,6 +29,7 @@ function App(globalState) {
           <Route path='/search' component={Search}/>
           <Route path='/world' component={WorldView}/>
           <Route path='/bookmarks' component={BookmarkTab}/>
+          <Route path='/create_account' component={CreateAccount}/>
         </Switch>
       </main>
 

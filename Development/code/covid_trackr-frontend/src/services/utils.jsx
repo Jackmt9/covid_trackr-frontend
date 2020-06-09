@@ -76,3 +76,21 @@ export const fetchCountry = (countryCode) => {
     return fetch( BACKEND + `/countries/${countryCode}`)
     .then(r => r.json())
 }
+
+export const fetchCreateBookmark = (country_id, token) => {
+    return fetch( BACKEND + `/bookmarks/${country_id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(r => r.json())
+}
+
+export const fetchBookmarks = (token) => {
+    return fetch( BACKEND + `/bookmarks`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(r => r.json())
+}

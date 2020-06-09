@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import {fetchLatestStatus, fetchLatestDiff, fetchCountry} from '../services/utils'
+import {fetchLatestStatus, fetchLatestDiff, fetchCountry, fetchCreateBookmark, fetchBookmarks} from '../services/utils'
 
 class Search extends Component {
 
@@ -7,7 +7,8 @@ class Search extends Component {
         searchTerm: "",
         listOfDiffs: [],
         listOfStatus: [],
-        filter: "Total"
+        filter: "Total",
+        bookmarks: []
     }
 
     componentDidMount = () => {
@@ -21,6 +22,12 @@ class Search extends Component {
         .then(obj => {
             obj = this.handleObj(obj)
             this.setState({listOfStatus: obj})
+        })
+
+        fetchBookmarks(localStorage.token)
+        .then(obj => {
+            console.log(obj)
+            this.setState({bookmarks: obj["bookmarks"]})
         })
     }
 
@@ -61,13 +68,31 @@ class Search extends Component {
         }
     }
 
+    filterBySearch = () => {
+        let array = this.handleResults().filter(r => r.country.toUpperCase().includes(this.state.searchTerm.toUpperCase()))
+        return array.sort(function(a, b){
+            if(a.country < b.country) { return -1; }
+            if(a.country > b.country) { return 1; }
+            return 0;
+        })
+    }
+
+    fullOrEmptyStar = (country_id) => {
+        let star = "☆"
+        this.state.bookmarks.map(e => {
+            if (e["country_id"] === country_id){
+                star = "⭑"
+            }
+        })
+        return star
+    }
 
     makeTableRow = (row) => {
         // console.log(row)
         if (this.state.filter === "Total") {
         return (
-            <tr key={row["id"]}>
-                <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>☆</td>
+            <tr key={row["country"]}>
+                <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>{this.fullOrEmptyStar(row["id"])}</td>
                 <td>{row["country"]}</td>
                 <td>{row["cases"]}</td>
                 <td>{row["deaths"]}</td>
@@ -76,8 +101,8 @@ class Search extends Component {
         )
         } else {
             return (
-                <tr key={row["id"]}>
-                    <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>☆</td>
+                <tr key={row["country"]}>
+                    <td onClick={(evt) => this.handleBookmark(evt, row["id"])}>{this.fullOrEmptyStar(row["id"])}</td>
                     <td>{row["country"]}</td>
                     <td>{row["new_cases"]}</td>
                     <td>{row["new_deaths"]}</td>
@@ -94,6 +119,11 @@ class Search extends Component {
         // const country = evt.target.nextElementSibling.innerText
         // console.log(country)
         console.log(id)
+        const token = localStorage.token
+        fetchCreateBookmark(id, token)
+        .then(obj => {
+            console.log(obj)
+        })
 
     }
 
@@ -114,7 +144,7 @@ class Search extends Component {
                             <th><h1>Recovered</h1></th>
                         </tr>
 
-                        {this.handleResults().map(r => this.makeTableRow(r))}
+                        {this.filterBySearch().map(r => this.makeTableRow(r))}
                     </tbody>
                 </table>
             </>

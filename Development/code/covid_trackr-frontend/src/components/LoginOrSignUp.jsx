@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux'
+import { Redirect } from "react-router-dom";
 
-const LoginOrSignup = () => {
-    return(
-        <h1>hello from loginorsignup</h1>
-    )
+class LoginOrSignup extends Component {
+    render() {
+        return(
+            <>
+            <h1>COVID TRACKr</h1>
+            <button onClick={() => this.props.history.push(`/login`)}>Log In</button>
+            <button onClick={() => this.props.history.push(`/create_account`)}>Sign Up</button>
+            </>
+        )
+    }
 }
 
 export default LoginOrSignup
