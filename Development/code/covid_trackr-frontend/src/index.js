@@ -15,8 +15,8 @@ let initialState = {
     username: "",
     email: "",
     "subscribed?": "",
-    bookmarks: []
-  }
+  },
+  bookmarks: []
 }
 
 let reducer = (state = initialState, action) => {
@@ -28,6 +28,14 @@ let reducer = (state = initialState, action) => {
         ...state,
         user: user
       }
+
+    case "ADD_BOOKMARK":
+      let bookmark = action.payload
+      return {
+        ...state,
+        bookmarks: [state.bookmarks, bookmark]
+      }
+      
     case "LOGOUT":
       console.log("Logging out")
       return{

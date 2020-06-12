@@ -7,15 +7,15 @@ const NavBar = (props) => {
     if (localStorage.token){
     return(
         <ul className='nav'>
-            <li>
+            {/* <li>
                 <NavLink to="/world">World</NavLink>
-            </li>
+            </li> */}
             <li>
                 <NavLink to="/search">Search</NavLink>
             </li>
-            <li>
+            {/* <li>
                 <NavLink to="/bookmarks">Bookmarks</NavLink>
-            </li>
+            </li> */}
             <li>
                 <NavLink to="/account">Account</NavLink>
             </li>

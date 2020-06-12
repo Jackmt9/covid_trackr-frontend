@@ -31,11 +31,11 @@ class WorldView extends Component {
     }
 
     render() {
-        const diff = {
-            total_cases: this.state.today.total_cases - this.state.yesterday.total_cases,
-            total_deaths: this.state.today.total_deaths - this.state.yesterday.total_deaths,
-            total_recovered: this.state.today.total_recovered - this.state.yesterday.total_recovered
-        }
+        // const diff = {
+        //     total_cases: this.state.today.total_cases - this.state.yesterday.total_cases,
+        //     total_deaths: this.state.today.total_deaths - this.state.yesterday.total_deaths,
+        //     total_recovered: this.state.today.total_recovered - this.state.yesterday.total_recovered
+        // }
         // debugger
 
         return(

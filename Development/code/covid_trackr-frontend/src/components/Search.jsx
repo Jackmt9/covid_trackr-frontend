@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
-import {fetchLatestStatus, fetchLatestDiff, fetchCountry, fetchCreateBookmark, fetchBookmarks} from '../services/utils'
+import {fetchLatestStatus, fetchLatestDiff, fetchCountry, fetchCreateBookmark, fetchBookmarks, fetchDeleteBookmark} from '../services/utils'
+import {connect} from 'react-redux'
 
 class Search extends Component {
 
@@ -8,6 +9,7 @@ class Search extends Component {
         listOfDiffs: [],
         listOfStatus: [],
         filter: "Total",
+        bookmarksOnly: false,
         bookmarks: []
     }
 
@@ -27,6 +29,7 @@ class Search extends Component {
         fetchBookmarks(localStorage.token)
         .then(obj => {
             console.log(obj)
+            // obj["bookmarks"].forEach(r => userBookmark(r))
             this.setState({bookmarks: obj["bookmarks"]})
         })
     }
@@ -35,11 +38,11 @@ class Search extends Component {
         obj.map(e => {
             fetchCountry(e.country)
             .then(countryE => {
-                // console.log(countryE)
                 e.country = countryE.name
                 e.id = countryE.id
             })
         })
+        console.log(obj)
         return obj
     }
 
@@ -58,14 +61,40 @@ class Search extends Component {
     }
 
     handleResults = () => {
+        let arrayToReturn = this.listOfStatus
         switch(this.state.filter){
             case "Total":
-                return this.state.listOfStatus
+                arrayToReturn = this.state.listOfStatus
+                break;
             case "Today":
-                return this.state.listOfDiffs
-            default:
-                return this.listOfStatus
+                arrayToReturn = this.state.listOfDiffs
+                break;
         }
+        if (this.state.bookmarksOnly === false){
+            return arrayToReturn
+        } else {
+            return this.showBookmarksOnly(arrayToReturn)
+        }
+    }
+
+    showBookmarksOnly = (array) => {
+        console.log(array)
+        console.log(this.state.bookmarks)
+        // return array.filter(e => {
+        //     if (this.state.bookmarks.find(b =>{e.id === b.country_id})){
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // })
+        let filteredArray  = array.filter(e => {
+            let foundCase = this.state.bookmarks.find(b => {
+                return (e.id === b.country_id)
+            })
+            return foundCase
+        })
+        console.log(filteredArray)
+        return filteredArray
     }
 
     filterBySearch = () => {
@@ -113,18 +142,42 @@ class Search extends Component {
     }
 
     handleBookmark = (evt, id) => {
-        evt.target.innerText = "⭑"
-        // debugger
-        // // handle fetch and unclicking
-        // const country = evt.target.nextElementSibling.innerText
-        // console.log(country)
-        console.log(id)
         const token = localStorage.token
-        fetchCreateBookmark(id, token)
-        .then(obj => {
-            console.log(obj)
+        if (evt.target.innerText === "☆") {
+            evt.target.innerText = "⭑"
+            console.log(id)
+            this.setState(prevState => ({
+                ...prevState,
+                bookmarks: [...prevState.bookmarks, {country_id: id}]
+            }))
+            
+            fetchCreateBookmark(id, token)
+            .then(obj => {
+                console.log(obj)
         })
+        } else {
+            evt.target.innerText = "☆"
+            // remove bookmark from backend here.
+            // let bookmark_id = this.state.bookmarks.map(r => {
+            //     if (r.country === id) {
+            //         return r.id
+            //     }
+            // })
+            // debugger
+            // console.log(`Attempting to delete bookmark id ${bookmark_id}`)
+            // fetchDeleteBookmark(bookmark_id, token)
+            // .then(obj => console.log(obj))
+        }
+    }
 
+    handleBookmarkFilterClick = (evt) => {
+        if (evt.target.innerText === "Show all entries"){
+            evt.target.innerText = "Show Bookmarks Only"
+            this.setState({ bookmarksOnly: false})
+        } else { 
+            evt.target.innerText = "Show all entries"
+            this.setState({ bookmarksOnly: true})
+        }
     }
 
     render() {
@@ -134,6 +187,8 @@ class Search extends Component {
                 <input type="text" autoComplete="off" name="search" value={this.state.searchTerm} onChange={this.handleChange}/>
                 <button onClick={this.handleTotalClick}>Total</button>
                 <button onClick={this.handleTodayClick}>Today</button>
+                <br/>
+                <button onClick={this.handleBookmarkFilterClick}>Show Bookmarks Only</button>
                 <table>
                     <tbody>
                         <tr>
@@ -152,6 +207,18 @@ class Search extends Component {
     }
 }
 
-export default Search
+let userBookmark = (bookmark) => {
+    return {
+        type: "ADD_BOOKMARK",
+        payload: bookmark
+    }
+}
+
+let mapDispatchToProps = {
+    propsAddBookmarks: userBookmark
+}
+
+export default connect(null, mapDispatchToProps)(Search)
+
 
 

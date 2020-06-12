@@ -13,6 +13,7 @@ class AccountTab extends Component {
     handleLogout = () => {
         this.props.propsLogout()
         localStorage.clear()
+        this.props.history.push('/')
     }
 
     handleEmailChangeButton = () => {
