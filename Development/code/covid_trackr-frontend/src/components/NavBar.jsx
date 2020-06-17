@@ -9,7 +9,7 @@ const NavBar = (props) => {
     if (localStorage.token){
     return(
         <ul className='nav'>
-              <Navbar bg="dark" variant="dark">
+              <Navbar variant="dark" className='color-nav'>
                 {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
                 <Nav className="mr-auto">
                             <NavLink to="/search" className='nav-link'>Search</NavLink>
