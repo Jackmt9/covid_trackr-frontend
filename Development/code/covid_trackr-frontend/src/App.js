@@ -21,7 +21,12 @@ function App(globalState) {
         <img className="logo" src="https://static01.nyt.com/images/2015/07/20/science/20earth_dscovr/20earth_dscovr-jumbo.png"></img>
         <h1>TRACKr</h1>
       </div>
+      {localStorage.token? 
         <NavBar/>
+      :
+        ''
+    }
+        
       <main>
         <Switch>
           <Route path='/' exact component={LoginOrSignUp}/>

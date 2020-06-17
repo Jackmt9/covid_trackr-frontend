@@ -35,8 +35,44 @@ code {
 .App{
   background: black;
   color: white;
+  min-height: 100vh;
 }
 
 .color-nav{
   background-color: rgb(117, 42, 42);
+}
+
+table {
+  text-align: left;
+  position: relative;
+  /* border: white; */
+  border-spacing: 10px;
+  /* border-collapse: separate; */
+}
+
+th {
+  background: black;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+}
+
+tr:hover {
+  background-color: rgb(117, 42, 42);
+}
+
+.ls-button:hover {
+  background-color: rgb(73, 24, 24);
+}
+
+.ls-button{
+  color: white;
+  font-family: monospace;
+  font-size: 100px;
+  padding: 14px 28px;
+  background: rgb(117, 42, 42);
+  /* border: yellow; */
+  border-right-width: 3px;
+  border-right-color: black;
+
 }

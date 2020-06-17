@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
-import { fetchUpdateEmail } from "../services/utils";
+import { fetchUpdateEmail, fetchDeleteUser } from "../services/utils";
+import { Redirect } from 'react-router-dom'
 
 class AccountTab extends Component {
 
     state = {
         email: "",
         showEmailForm: false,
-        updated: false
+        updated: false,
+        deleted: false,
+        logout: false
     }
 
     handleLogout = () => {
         this.props.propsLogout()
         localStorage.clear()
-        this.props.history.push('/')
+        // this.props.history.push('/')
+        this.setState({
+            logout: true
+        })
     }
 
     handleEmailChangeButton = () => {
@@ -43,6 +49,22 @@ class AccountTab extends Component {
         })
     }
 
+    handleDelete = () => {
+        fetchDeleteUser(localStorage.token)
+        .then(r => {
+            console.log(r)
+            
+            if (r.message === "User destroyed."){
+                localStorage.clear()
+                this.setState({
+                    deleted: true
+                })
+            }
+        })
+        this.props.history.push('/')
+
+    }
+
     render() {
         let emailForm = 
         this.state.updated ? 
@@ -60,6 +82,10 @@ class AccountTab extends Component {
             {this.state.showNameForm? emailForm : ''}
             <br/>
             <button onClick={this.handleLogout} >Log Out</button>
+            <br/>
+            <button className='delete-button' onClick={this.handleDelete} >Delete Account</button>
+            {this.state.deleted? "Account Deleted" : ''}
+            {this.state.logout? <Redirect to='/'/> : ''}
             </div>
         )
     }

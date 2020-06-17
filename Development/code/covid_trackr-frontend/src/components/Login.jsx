@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux'
 import {fetchLoginUser} from '../services/utils'
+import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
 
 
     state = {
         username: "",
-        password: ""
+        password: "",
+        auth: false
     }
 
     handleChange = ({target}) => {
@@ -31,8 +33,12 @@ class Login extends Component {
         } else {
             localStorage.token = resp.token
             this.props.propsAddUser(resp)
-            this.props.history.push('/account')
             console.log(resp)
+            // this.props.history.push('/search')
+            // return <Redirect to='/search'/>
+            this.setState({
+                auth: true
+            })
         }
     }
 
@@ -50,6 +56,7 @@ class Login extends Component {
                 <input type="password" autoComplete="off" name="password" value={this.state.value} onChange={this.handleChange}/>
                 <br/>
                 <input type="submit" value="Submit"/>
+                {this.state.auth? <Redirect to='/search'/> : ''}
             </form>
         )
     }

@@ -193,15 +193,15 @@ class Search extends Component {
                 <br/>
                 <button onClick={this.handleBookmarkFilterClick}>Show Bookmarks Only</button>
                 <table>
-                    <tbody>
                         <tr>
-                            <th><h1>Bookmark</h1></th>
+                            <th><h1>   </h1></th>
                             <th><h1>Country</h1></th>
                             <th><h1>Cases</h1></th>
                             <th><h1>Deaths</h1></th>
                             <th><h1>Recovered</h1></th>
                         </tr>
 
+                    <tbody>
                         {this.filterBySearch().map(r => this.makeTableRow(r))}
                     </tbody>
                 </table>

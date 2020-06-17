@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav'
 const NavBar = (props) => {
     console.log(localStorage.token)
     console.log(props)
-    if (localStorage.token){
+    // if (localStorage.token){
     return(
         <ul className='nav'>
               <Navbar variant="dark" className='color-nav'>
@@ -23,10 +23,10 @@ const NavBar = (props) => {
            
         </ul>
     )
-    }
-    else{
-        return ""
-    }
+    // }
+    // else{
+    //     return ""
+    // }
 }
 
 export default NavBar;
