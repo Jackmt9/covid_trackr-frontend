@@ -17,8 +17,9 @@ function App(globalState) {
   return (
     <div className="App">
       <div className='Header'>
-        <h1>COVID TRACKr</h1>
+        <h1>COVID</h1>
         <img className="logo" src="https://static01.nyt.com/images/2015/07/20/science/20earth_dscovr/20earth_dscovr-jumbo.png"></img>
+        <h1>TRACKr</h1>
       </div>
         <NavBar/>
       <main>

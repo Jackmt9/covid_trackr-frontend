@@ -1,5 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 const NavBar = (props) => {
     console.log(localStorage.token)
@@ -7,18 +9,18 @@ const NavBar = (props) => {
     if (localStorage.token){
     return(
         <ul className='nav'>
-            {/* <li>
-                <NavLink to="/world">World</NavLink>
-            </li> */}
-            <li>
-                <NavLink to="/search">Search</NavLink>
-            </li>
-            {/* <li>
-                <NavLink to="/bookmarks">Bookmarks</NavLink>
-            </li> */}
-            <li>
-                <NavLink to="/account">Account</NavLink>
-            </li>
+              <Navbar bg="dark" variant="dark">
+                {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
+                <Nav className="mr-auto">
+                            <NavLink to="/search" className='nav-link'>Search</NavLink>
+                            <NavLink to="/account" className='nav-link'>Account</NavLink>
+                </Nav>
+                {/* <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <Button variant="outline-info">Search</Button>
+                </Form> */}
+            </Navbar>
+           
         </ul>
     )
     }

@@ -14,7 +14,7 @@ code {
 
 .nav{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 150px);
   list-style-type: none;
 }
 
@@ -22,11 +22,17 @@ code {
   width: 50px
 }
 
-header{
+.nav:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.Header{
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 150px 60px 150px;
 }
 
 .App{
-  /* background: black; */
+  background: black;
+  color: white;
 }
