@@ -29,7 +29,7 @@ class Search extends Component {
         fetchBookmarks(localStorage.token)
         .then(obj => {
             console.log(obj)
-            // obj["bookmarks"].forEach(r => userBookmark(r))
+
             this.setState({bookmarks: obj["bookmarks"]})
         })
     }
@@ -157,17 +157,19 @@ class Search extends Component {
         })
         } else {
             evt.target.innerText = "☆"
-            // remove bookmark from backend here.
-            // let bookmark_id = this.state.bookmarks.map(r => {
-            //     if (r.country === id) {
-            //         return r.id
-            //     }
-            // })
-            // debugger
-            // console.log(`Attempting to delete bookmark id ${bookmark_id}`)
-            // fetchDeleteBookmark(bookmark_id, token)
-            // .then(obj => console.log(obj))
+
+            this.deleteBookmarkFrontend(id)
+            fetchDeleteBookmark(id, token)
+            .then(obj => console.log(obj))
         }
+    }
+
+    deleteBookmarkFrontend(id){
+        this.setState(prevState => ({
+            ...prevState,
+            bookmarks: [...prevState.bookmarks.filter(e => e.country_id !== id)]
+        }))
+        console.log(this.state)
     }
 
     handleBookmarkFilterClick = (evt) => {

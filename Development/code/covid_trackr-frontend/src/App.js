@@ -16,10 +16,11 @@ function App(globalState) {
   console.log(globalState)
   return (
     <div className="App">
-
       <div className='Header'>
-        <NavBar/>
+        <h1>COVID TRACKr</h1>
+        <img className="logo" src="https://static01.nyt.com/images/2015/07/20/science/20earth_dscovr/20earth_dscovr-jumbo.png"></img>
       </div>
+        <NavBar/>
       <main>
         <Switch>
           <Route path='/' exact component={LoginOrSignUp}/>
