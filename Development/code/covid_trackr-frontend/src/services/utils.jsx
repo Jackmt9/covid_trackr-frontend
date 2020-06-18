@@ -32,7 +32,7 @@ export const fetchCreateUser = (user_params) => {
         headers: {
             'content-type': 'application/json'
         },
-        body: user_params
+        body: JSON.stringify(user_params)
     })
     .then(r => r.json())
 }
