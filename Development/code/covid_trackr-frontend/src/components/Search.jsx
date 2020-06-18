@@ -35,7 +35,7 @@ class Search extends Component {
     }
 
     handleObj = (obj) => {
-        obj.map(e => {
+        obj.forEach(e => {
             fetchCountry(e.country)
             .then(countryE => {
                 e.country = countryE.name
@@ -69,6 +69,8 @@ class Search extends Component {
             case "Today":
                 arrayToReturn = this.state.listOfDiffs
                 break;
+            default:
+                arrayToReturn = this.listOfStatus
         }
         if (this.state.bookmarksOnly === false){
             return arrayToReturn
@@ -108,7 +110,7 @@ class Search extends Component {
 
     fullOrEmptyStar = (country_id) => {
         let star = "☆"
-        this.state.bookmarks.map(e => {
+        this.state.bookmarks.forEach(e => {
             if (e["country_id"] === country_id){
                 star = "⭑"
             }
@@ -193,6 +195,7 @@ class Search extends Component {
                 <br/>
                 <button onClick={this.handleBookmarkFilterClick}>Show Bookmarks Only</button>
                 <table>
+                    <thead>
                         <tr>
                             <th><h1>   </h1></th>
                             <th><h1>Country</h1></th>
@@ -200,7 +203,7 @@ class Search extends Component {
                             <th><h1>Deaths</h1></th>
                             <th><h1>Recovered</h1></th>
                         </tr>
-
+                    </thead>
                     <tbody>
                         {this.filterBySearch().map(r => this.makeTableRow(r))}
                     </tbody>

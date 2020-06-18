@@ -8,7 +8,7 @@ import CreateAccount from './components/CreateAccount'
 import AccountTab from './components/AccountTab'
 import LoginOrSignUp from './components/LoginOrSignUp.jsx'
 import NavBar from './components/NavBar'
-import {Route, Switch, Link, NavLink} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 // import {connect} from 'react-redux'
 
 
@@ -18,7 +18,7 @@ function App(globalState) {
     <div className="App">
       <div className='Header'>
         <h1>COVID</h1>
-        <img className="logo" src="https://static01.nyt.com/images/2015/07/20/science/20earth_dscovr/20earth_dscovr-jumbo.png"></img>
+        <img className="logo" src="https://static01.nyt.com/images/2015/07/20/science/20earth_dscovr/20earth_dscovr-jumbo.png" alt='earth from space'></img>
         <h1>TRACKr</h1>
       </div>
       {localStorage.token? 

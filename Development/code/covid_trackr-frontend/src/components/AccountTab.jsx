@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
-import { fetchUpdateEmail, fetchDeleteUser } from "../services/utils";
+import { fetchUpdateEmail, fetchDeleteUser, fetchUserInfo } from "../services/utils";
 import { Redirect } from 'react-router-dom'
 
 class AccountTab extends Component {
@@ -11,6 +11,16 @@ class AccountTab extends Component {
         updated: false,
         deleted: false,
         logout: false
+    }
+
+    componentDidMount = () => {
+        fetchUserInfo(localStorage.token)
+        .then(r => {
+            this.setState({
+                email: r.email
+            })
+            console.log(r.email)
+        })
     }
 
     handleLogout = () => {
@@ -26,7 +36,7 @@ class AccountTab extends Component {
         // this.props.history.push('/changeName')
         // debugger
         this.setState(prevState => ({
-            showNameForm: !prevState.showEmailForm
+            showEmailForm: !prevState.showEmailForm
         }))
     }
 
@@ -68,18 +78,18 @@ class AccountTab extends Component {
     render() {
         let emailForm = 
         this.state.updated ? 
-        "Email Updated"
+        <p>Email Updated</p>
         :
         <form onSubmit={this.handleFormSubmit}>
         <label htmlFor="email">Email:</label>
-        <input type="text" autoComplete="off" name="email" value={this.state.name} onChange={this.handleEmailChange}/>
+        <input type="text" autoComplete="off" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
         <input type="submit" value="Submit"></input>
         </form>
 
         return(
             <div>
             <button onClick={this.handleEmailChangeButton} >Change Email</button>
-            {this.state.showNameForm? emailForm : ''}
+            {this.state.showEmailForm? emailForm : ''}
             <br/>
             <button onClick={this.handleLogout} >Log Out</button>
             <br/>

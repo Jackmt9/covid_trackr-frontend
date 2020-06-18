@@ -104,3 +104,12 @@ export const fetchDeleteBookmark = (id, token) => {
     })
     .then(r => r.json())
 }
+
+export const fetchUserInfo = (token) => {
+    return fetch( BACKEND + `/users`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(r => r.json())
+}
