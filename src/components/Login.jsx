@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux'
 import {fetchLoginUser} from '../services/utils'
 import { Redirect } from 'react-router-dom'
 
@@ -21,7 +20,6 @@ class Login extends Component {
     handleSubmit = (evt) => {
         evt.preventDefault()
         fetchLoginUser(this.state)
-        // .then(resp => this.handleResponse(resp)) 
         .then((loggedInUser) => {
             this.handleResponse(loggedInUser)
         })
@@ -32,10 +30,7 @@ class Login extends Component {
             alert(resp.message)
         } else {
             localStorage.token = resp.token
-            this.props.propsAddUser(resp)
             console.log(resp)
-            // this.props.history.push('/search')
-            // return <Redirect to='/search'/>
             this.setState({
                 auth: true
             })
@@ -74,4 +69,4 @@ let mapDispatchToProps = {
     propsAddUser: loggedInUser
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default Login

@@ -1,6 +1,5 @@
 import React,{ Component } from "react";
 import {fetchLatestStatus, fetchLatestDiff, fetchCountry, fetchCreateBookmark, fetchBookmarks, fetchDeleteBookmark} from '../services/utils'
-import {connect} from 'react-redux'
 
 class Search extends Component {
 
@@ -82,13 +81,6 @@ class Search extends Component {
     showBookmarksOnly = (array) => {
         console.log(array)
         console.log(this.state.bookmarks)
-        // return array.filter(e => {
-        //     if (this.state.bookmarks.find(b =>{e.id === b.country_id})){
-        //         return true
-        //     } else {
-        //         return false
-        //     }
-        // })
         let filteredArray  = array.filter(e => {
             let foundCase = this.state.bookmarks.find(b => {
                 return (e.id === b.country_id)
@@ -110,6 +102,7 @@ class Search extends Component {
 
     fullOrEmptyStar = (country_id) => {
         let star = "☆"
+        debugger
         this.state.bookmarks.forEach(e => {
             if (e["country_id"] === country_id){
                 star = "⭑"
@@ -119,7 +112,6 @@ class Search extends Component {
     }
 
     makeTableRow = (row) => {
-        // console.log(row)
         if (this.state.filter === "Total") {
         return (
             <tr key={row["country"]}>
@@ -213,18 +205,8 @@ class Search extends Component {
     }
 }
 
-let userBookmark = (bookmark) => {
-    return {
-        type: "ADD_BOOKMARK",
-        payload: bookmark
-    }
-}
 
-let mapDispatchToProps = {
-    propsAddBookmarks: userBookmark
-}
-
-export default connect(null, mapDispatchToProps)(Search)
+export default Search
 
 
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux';
 import { fetchUpdateEmail, fetchDeleteUser, fetchUserInfo } from "../services/utils";
 import { Redirect } from 'react-router-dom'
 
@@ -101,14 +100,4 @@ class AccountTab extends Component {
     }
 }
 
-let logout = () => {
-    return {
-        type: "LOGOUT",
-    }
-}
-
-let mapDispatchToProps = {
-    propsLogout: logout
-}
-
-export default connect(null, mapDispatchToProps)(AccountTab)
+export default AccountTab
