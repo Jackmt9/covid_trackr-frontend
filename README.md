@@ -30,7 +30,7 @@ To activate the frontend:
 1. Clone this repositiory.
 2. Install all dependencies by running ```$ npm install```.
 3. Start the development server by running ```$ npm start```.
-4. Open your browser and navigate to http://localhost:3000/.
+4. Open your browser and navigate to http://localhost:3001/.
 
 ### Tools
 - React.js
